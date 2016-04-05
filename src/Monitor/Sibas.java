@@ -27,13 +27,14 @@ import java.util.logging.Logger;
 public class Sibas extends javax.swing.JFrame {
     int r = 0;
     int maxNumberOfLines = 27;
+    String phrase;
     /**
      * Creates new form Sibas
      */
     public Sibas() {
         initComponents();
         String fn = "init";
-        runAction(fn);
+        initi();
     }
 
     /**
@@ -49,6 +50,7 @@ public class Sibas extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         resultsBox = new javax.swing.JTextArea();
+        editBox = new javax.swing.JTextField();
         jMenuBar2 = new javax.swing.JMenuBar();
         UIManager.put("Menu.selectionBackground",new Color(192,192,192));
         UIManager.put("MenuItem.selectionBackground",new Color(192,192,192));
@@ -195,6 +197,7 @@ public class Sibas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setRequestFocusEnabled(false);
         jPanel3.setVerifyInputWhenFocusTarget(false);
 
@@ -208,17 +211,38 @@ public class Sibas extends javax.swing.JFrame {
         resultsBox.getAccessibleContext().setAccessibleDescription("");
         resultsBox.getAccessibleContext().setAccessibleParent(resultsBox);
 
+        editBox.setEditable(false);
+        editBox.setBackground(new java.awt.Color(255, 255, 0));
+        editBox.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 15)); // NOI18N
+        editBox.setText(" Edit:");
+        editBox.setToolTipText("");
+        editBox.setBorder(null);
+        editBox.setSelectionColor(new java.awt.Color(255, 255, 0));
+        editBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 974, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 974, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(editBox, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 36, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editBox, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenuBar2.setBackground(new java.awt.Color(224, 224, 224));
@@ -953,11 +977,11 @@ public class Sibas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -969,7 +993,7 @@ public class Sibas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        runAction("setPort");
+        setPort();
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
@@ -977,7 +1001,7 @@ public class Sibas extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        // TODO add your handling code here:
+        setMake();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
@@ -1036,6 +1060,10 @@ public class Sibas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem94ActionPerformed
 
+    private void editBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editBoxActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -1048,9 +1076,9 @@ public class Sibas extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
 
- /*       try {
+/*        try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -1066,48 +1094,58 @@ public class Sibas extends javax.swing.JFrame {
         }
         //</editor-fold>
         UIManager.put("Menu.selectionForeground", Color.red);
- */       /* Create and display the form */
+        /* Create and display the form */
          javax.swing.SwingUtilities.invokeLater(new Runnable() {       
             public void run() {
                 new Sibas().setVisible(true);
+                
             }
         });
     }
 
-    public void runAction (String selectedAction) {
+    public void initi () {
         String file_name;
-        switch (selectedAction){
-            case "init":
-                
-                file_name =  "C:\\SIBAS32\\Simulator\\initFile.txt";
-                //String file_name = "C:\\SIBAS32\\Os_Moni\\init.mon";
-                try{
-                    ReadFile file = new ReadFile( file_name );
+        file_name =  "C:\\SIBAS32\\Simulator\\initFile.txt";
+        try{
+            ReadFile file = new ReadFile( file_name );
 
-                    String[ ] aryLines = file.OpenFile( );
+            String[ ] aryLines = file.OpenFile( );
 
-                    int i;
-                    for ( i=0; i < aryLines.length; i++ ) {
-                        updateResultsBox(aryLines[i]);
-                    }
-                    updateResultsBox("last");
-                }
-                catch (IOException e) {
-                    System.out.println(e.getMessage());
-                }
-
-                break;
-                
-            case "setPort":
-                updateResultsBox("first");
-                r++;
-                updateResultsBox(Integer.toString(r));
-                updateResultsBox(Integer.toString(r));                
-                updateResultsBox(Integer.toString(r));
-                updateResultsBox("last");
-                    
-                break;
+            int i;
+            for ( i=0; i < aryLines.length; i++ ) {
+                updateResultsBox(aryLines[i]);
+            }
+            updateResultsBox("last");
         }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+}
+    public void setPort () {
+        updateResultsBox("first");
+        r++;
+        updateResultsBox(Integer.toString(r));
+        updateResultsBox(Integer.toString(r));                
+        updateResultsBox(Integer.toString(r));
+        updateResultsBox("last");
+    }
+    
+    public void setMake() {
+        editEditBox("  Set  Make" + " ");
+    }
+    
+    public void editEditBox (String expression) {
+        int numberOfChar;
+        phrase = editBox.getText();
+        phrase = phrase + expression;
+        numberOfChar = phrase.length();
+        
+        editBox.setText(phrase);
+        editBox.setSize(numberOfChar * 9, 20);
+    }
+    
+    public void runAction (String selectedAction) {
+        
     }   
     
     public void updateResultsBox(String stuffToWrite) {
@@ -1166,6 +1204,7 @@ public class Sibas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField editBox;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
